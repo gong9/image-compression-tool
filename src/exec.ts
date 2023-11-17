@@ -14,9 +14,14 @@ catch (error) {
   console.error('获取Git工作空间路径失败:', error)
 }
 
-const execDiff = () => {
+const execDiff = (isAll = false) => {
   const command = 'git diff --cached --name-only'
   const imagePathList: string[] = []
+
+  if (isAll) {
+    // todo: need to be optimized
+    return
+  }
 
   // eslint-disable-next-line promise/param-names
   return new Promise((res, rej) => {
@@ -33,7 +38,8 @@ const execDiff = () => {
 
         else {
           stdout.split('\n').forEach((item) => {
-            if (REGEX.test(item))
+            // todo: 优化正则
+            if (item.includes('png') || item.includes('jpg') || item.includes('jpeg') || item.includes('webp'))
               imagePathList.push(path.resolve(rootPath, item))
           })
 

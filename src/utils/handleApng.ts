@@ -4,7 +4,6 @@ import parseApng from 'apng-js'
 import { consola } from 'consola'
 import imageminPngquant from 'imagemin-pngquant'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import Assembler from 'apng-assembler'
 import fs from 'fs-extra'

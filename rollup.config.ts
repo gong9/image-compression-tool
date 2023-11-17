@@ -21,7 +21,9 @@ export default [
     plugins: [
       babel(),
       commonjs(),
-      typescript(),
+      typescript({
+        check: false,
+      }),
       json(),
     ],
   },
