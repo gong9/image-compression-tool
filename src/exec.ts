@@ -2,7 +2,7 @@ import { exec, execSync } from 'node:child_process'
 import path from 'node:path'
 import { consola } from 'consola'
 
-import handleCompress from './utils/compression.js'
+import handleCompress, { traverseDirectory } from './utils/compression.js'
 
 export const REGEX = /\.(jpg|jpeg|png|gif|webp)$/g
 let rootPath: string
@@ -19,7 +19,22 @@ const execDiff = (isAll = false) => {
   const imagePathList: string[] = []
 
   if (isAll) {
-    // todo: need to be optimized
+    traverseDirectory(rootPath,
+      (currentPath) => {
+        const name = path.extname(currentPath) ?? ''
+        if (name.includes('png') || name.includes('jpg') || name.includes('jpeg') || name.includes('webp')) {
+          console.log(currentPath)
+          imagePathList.push(currentPath)
+        }
+      }).then(() => {
+        if (imagePathList.length > 0) {
+          consola.info(`检测到图片资源: ${imagePathList.join(', ')}`)
+          handleCompress(imagePathList, rootPath)
+        }
+        else {
+          consola.info('没有检测到图片资源')
+        }
+      })
     return
   }
 

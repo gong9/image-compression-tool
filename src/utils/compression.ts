@@ -147,4 +147,56 @@ const handleCompress = async (pathArr: string[], rootPath: string) => {
         execSync('git add .')
 }
 
+type Callback = (filePath: string) => void
+
+export const traverseDirectory = (directoryPath: string, callback: Callback): Promise<void> => {
+    return new Promise((resolve, reject) => {
+        // 排除 node_modules 目录
+        if (directoryPath.includes('node_modules')) {
+            resolve()
+            return
+        }
+
+        fs.readdir(directoryPath, (err, files) => {
+            if (err) {
+                reject(err)
+                return
+            }
+
+            const promises: Promise<void>[] = []
+
+            files.forEach((file) => {
+                const fullPath = path.join(directoryPath, file)
+                // eslint-disable-next-line promise/param-names
+                const promise = new Promise<void>((res, rej) => {
+                    fs.stat(fullPath, (err, stat) => {
+                        if (err) {
+                            rej(err)
+                            return
+                        }
+
+                        if (stat.isDirectory()) {
+                            traverseDirectory(fullPath, callback).then(res, rej)
+                        }
+                        else {
+                            try {
+                                callback(fullPath)
+                                res()
+                            }
+                            catch (error) {
+                                rej(error)
+                            }
+                        }
+                    })
+                })
+
+                promises.push(promise)
+            })
+
+            // 等待所有文件处理完毕
+            Promise.all(promises).then(() => resolve()).catch(reject)
+        })
+    })
+}
+
 export default handleCompress

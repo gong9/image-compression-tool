@@ -27,6 +27,8 @@ git commit ...
 
 后续：
 
+> 暂时不支持apng格式的图片压缩
+
 针对于 apng 格式的图片，目前支持 apng 拆解成 png 序列帧，png 序列帧合成 apng
 
 但是由于 apng 拆解对导致图片的尺寸发生一些微笑变化，目前暂不可使用。故针对于 apng 的压缩可以直接给出 png 序列帧，在交由`assembleApng` 方法压缩
