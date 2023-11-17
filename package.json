@@ -1,6 +1,6 @@
 {
   "name": "image-compression-tool",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
@@ -76,8 +76,8 @@
     "imagemin-jpegtran": "^7.0.0",
     "imagemin-pngquant": "^9.0.2",
     "imagemin-webp": "^8.0.0",
-    "sharp": "^0.32.6",
     "is-apng": "^1.0.1",
+    "sharp": "^0.32.6",
     "uuid": "^9.0.1"
   }
 }

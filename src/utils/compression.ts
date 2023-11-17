@@ -36,18 +36,25 @@ const compress = async (imgPath: string, rootPath: string) => {
 
     map.set(imgPath, path.join(temp, path.basename(imgPath)))
 
-    const files = await imagemin([imgPath], {
-        destination: temp,
-        plugins: [
-            imageminJpegtran(),
-            imageminPngquant({
-                quality: [0.6, 0.8],
-            }),
-            imageminWebp({ quality: 80 }),
-        ],
-    })
-
-    return files
+    if (path.extname(imgPath).includes('webp')) {
+        await imagemin([imgPath], {
+            destination: temp,
+            plugins: [
+                imageminWebp({ quality: 80 }),
+            ],
+        })
+    }
+    else {
+        await imagemin([imgPath], {
+            destination: temp,
+            plugins: [
+                imageminJpegtran(),
+                imageminPngquant({
+                    quality: [0.6, 0.8],
+                }),
+            ],
+        })
+    }
 }
 
 /**
