@@ -11,10 +11,8 @@
 
 #### usage
 
-> notes: 最好使用 cnpm 安装，因为依赖问题其他安装方式可能会出现问题
-
 ```bash
-cnpm i image-compression-tool -g
+npm i image-compression-tool -g
 ```
 
 git add . 之后执行
