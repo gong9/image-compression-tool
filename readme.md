@@ -11,14 +11,18 @@
 
 #### usage
 
+因为有几个二进制文件需要使用淘宝忽略scripts先行安装一次，再执行pnpm i 使其再正常走一遍scripts hooks
+
 ```bash
-npm i image-compression-tool -g
+pnpm i --registry https://registry.npm.taobao.org
+pnpm add image-compression-tool -D --registry https://registry.npm.taobao.org --ignore-scripts
+pnpm i
 ```
 
 git add . 之后执行
 
 ```bash
-compression-tool
+npx compression-tool
 ```
 
 git commit ...
