@@ -15,7 +15,6 @@ const map = new Map<string, string>()
  * @returns
  */
 const isApng = async (path: string) => {
-    // @ts-expect-error
     const isApng = (await import('is-apng')).default
     const buffer = await readFile(path)
 
