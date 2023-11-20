@@ -11,18 +11,36 @@
 
 #### usage
 
-因为有几个二进制文件需要使用淘宝忽略scripts先行安装一次，再执行pnpm i 使其再正常走一遍scripts hooks
+因为有几个二进制文件需要走国内镜像
 
-```bash
-pnpm i --registry https://registry.npm.taobao.org
-pnpm add image-compression-tool -D --registry https://registry.npm.taobao.org --ignore-scripts
-pnpm i
+使用pnpm
+
+在packagejson下配置overrides
+
+```json
+{
+  // ...
+  "pnpm": {
+    "overrides": {
+      "*bin-wrapper": "npm:bin-wrapper-china"
+    }
+  },
+}
 ```
 
-或
+使用yarn则需要配置
+```json
+{
+   // ...
+  "resolutions": {
+    "**/bin-wrapper": "npm:bin-wrapper-china"
+  }
+}
+```
+https://github.com/yarnpkg/rfcs/blob/master/implemented/0000-selective-versions-resolutions.md
 
 ```bash
-cnpm image-compression-tool -D 
+pnpm add image-compression-tool 
 ```
 
 git add . 之后执行
@@ -32,6 +50,8 @@ npx compression-tool
 ```
 
 git commit ...
+
+如若不行，删除node_modules和lock文件再次执行pnpm i
 
 后续：
 
