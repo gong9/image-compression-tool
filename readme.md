@@ -15,11 +15,33 @@
 
 使用pnpm
 
+推荐使用pnpm hooks
+
+方式一： 推荐
+
+根目录创建.pnpmfile.cjs文件
+
+```cjs
+module.exports = {
+    hooks: {
+        readPackage(packageJson) {
+
+            if (packageJson.dependencies && packageJson.dependencies['bin-wrapper']) {
+                console.log('当前依赖名称：',packageJson.name, '需要转化');
+                packageJson.dependencies['bin-wrapper'] = 'npm:bin-wrapper-china';
+            }
+            return packageJson;
+        },
+
+    }
+};
+```
+
+方式二： 不推荐（有时不生效）
 在packagejson下配置overrides
 
 ```json
 {
-  // ...
   "pnpm": {
     "overrides": {
       "*bin-wrapper": "npm:bin-wrapper-china"
@@ -28,10 +50,9 @@
 }
 ```
 
-使用yarn则需要配置
+使用yarn则需要配置（不推荐，因个人常有pnpm没有经过yarn的测试。如果此方法不能成功压缩可自行尝试相关hook方案或者提个issues）
 ```json
 {
-   // ...
   "resolutions": {
     "**/bin-wrapper": "npm:bin-wrapper-china"
   }
