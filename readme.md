@@ -19,6 +19,12 @@ pnpm add image-compression-tool -D --registry https://registry.npm.taobao.org --
 pnpm i
 ```
 
+或
+
+```bash
+cnpm image-compression-tool -D 
+```
+
 git add . 之后执行
 
 ```bash
