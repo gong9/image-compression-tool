@@ -37,6 +37,14 @@ module.exports = {
 };
 ```
 
+有些时候可能sharp依赖也无法安装，可以添加.npmrc文件
+
+```
+registry=https://registry.npm.taobao.org
+sharp_binary_host=https://npm.taobao.org/mirrors/sharp
+sharp_libvips_binary_host=https://npm.taobao.org/mirrors/sharp-libvips
+```
+
 方式二： 不推荐（有时不生效）
 在packagejson下配置overrides
 
