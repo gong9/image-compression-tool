@@ -66,7 +66,7 @@ export const remove = async (filePath: string) => {
         const newPath = path.join(filePath, files[i])
         const stat = fs.statSync(newPath)
         if (stat.isDirectory())
-            remove(newPath)
+            await remove(newPath)
         else
             fs.unlinkSync(newPath)
     }

@@ -54,7 +54,7 @@ sharp_libvips_binary_host=https://npm.taobao.org/mirrors/sharp-libvips
     "overrides": {
       "*bin-wrapper": "npm:bin-wrapper-china"
     }
-  },
+  }
 }
 ```
 
