@@ -58,7 +58,7 @@ sharp_libvips_binary_host=https://npm.taobao.org/mirrors/sharp-libvips
 }
 ```
 
-使用yarn则需要配置（不推荐，因个人常有pnpm没有经过yarn的测试。如果此方法不能成功压缩可自行尝试相关hook方案或者提个issues）
+使用yarn则需要配置（不推荐，因个人常用pnpm没有经过yarn的测试。如果此方法不能成功压缩可自行尝试相关hook方案或者提个issues）
 ```json
 {
   "resolutions": {
